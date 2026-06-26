@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "732350039606",
+    "project_id": "gta-activity-app",
+    "storage_bucket": "gta-activity-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732350039606:android:54d2e6ec07e4b53ddf7a97",
+        "android_client_info": {
+          "package_name": "com.example.gta_activity_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB3UJildhYcrOXkGtyVwUcZohhCKsNHck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
