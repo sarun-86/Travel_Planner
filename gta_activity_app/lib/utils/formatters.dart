@@ -33,6 +33,21 @@ String costLabel(String tier) {
   return labels[tier] ?? tier;
 }
 
+String eventEmoji(String name) {
+  final n = name.toLowerCase();
+  if (n.contains('zoo')) return '🦁';
+  if (n.contains('niagara') || n.contains('falls') || n.contains('waterfall')) return '💧';
+  if (n.contains('market') || n.contains('night market')) return '🛍️';
+  if (n.contains('music') || n.contains('concert') || n.contains('festival')) return '🎵';
+  if (n.contains('parade')) return '🎉';
+  if (n.contains('beach') || n.contains('bluff')) return '🏖️';
+  if (n.contains('lake') || n.contains('conservation')) return '🌲';
+  if (n.contains('park') || n.contains('picnic')) return '🌿';
+  if (n.contains('waterfront') || n.contains('harbour') || n.contains('harbor')) return '⛵';
+  if (n.contains('flower') || n.contains('garden')) return '🌸';
+  return '📍';
+}
+
 String audienceLabel(String tag) {
   const labels = {
     'family': 'Family',

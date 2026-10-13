@@ -42,11 +42,35 @@ class _EventListScreenState extends State<EventListScreen> {
 
   List<Event> _applyFilters(List<Event> events) {
     return events.where((e) {
-      // This Weekend: event window overlaps [today, today+2 days]
+      // This Weekend: event window overlaps the upcoming Sat–Sun.
+      // Mon–Fri → next Sat+Sun. Saturday → today+Sun. Sunday → today only.
       if (_thisWeekendActive) {
-        final today = DateTime.now();
-        final weekend = today.add(const Duration(days: 2));
-        if (e.endDate.isBefore(today) || e.startDate.isAfter(weekend)) {
+        final now = DateTime.now();
+        final today = DateTime(now.year, now.month, now.day);
+        final int weekday = today.weekday; // Mon=1 … Sat=6, Sun=7
+
+        final DateTime weekendStart;
+        final DateTime weekendEnd;
+
+        if (weekday == DateTime.saturday) {
+          weekendStart = today;
+          weekendEnd = today.add(const Duration(days: 1));
+        } else if (weekday == DateTime.sunday) {
+          weekendStart = today;
+          weekendEnd = today;
+        } else {
+          final daysUntilSaturday = DateTime.saturday - weekday;
+          weekendStart = today.add(Duration(days: daysUntilSaturday));
+          weekendEnd = weekendStart.add(const Duration(days: 1));
+        }
+
+        // Include event if its window overlaps [weekendStart, weekendEnd].
+        // Normalize endDate to end-of-day so a single-day event isn't excluded.
+        final eventEnd = DateTime(
+          e.endDate.year, e.endDate.month, e.endDate.day, 23, 59, 59,
+        );
+        if (eventEnd.isBefore(weekendStart) ||
+            e.startDate.isAfter(weekendEnd)) {
           return false;
         }
       }

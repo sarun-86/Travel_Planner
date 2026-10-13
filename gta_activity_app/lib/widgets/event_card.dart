@@ -31,10 +31,19 @@ class EventCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Event name
-            Text(
-              event.name,
-              style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+            // Emoji + event name
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(eventEmoji(event.name), style: const TextStyle(fontSize: 28)),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    event.name,
+                    style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 6),
 
